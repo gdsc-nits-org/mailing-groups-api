@@ -3,7 +3,7 @@ const { google } = require("googleapis");
 let sheets;
 
 /**
- * Authenticate to Google Sheets API
+ * Authenticate to Google Sheets API using GOOGLE_APPLICATION_CREDENTIALS env var
  *
  * @returns Google Sheets Object
  */
