@@ -1,0 +1,20 @@
+{
+  "name": "mailing-groups-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:NIT-Silchar-Org/mailing-groups-api.git",
+  "author": "resyfer <resyfer.dev@gmail.com>",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "devDependencies": {
+    "@google-cloud/storage": "^5.16.1",
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "googleapis": "^92.0.0"
+  }
+}
