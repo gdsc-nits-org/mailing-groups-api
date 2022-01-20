@@ -1,5 +1,3 @@
-import clipboard from "clipboardy";
-
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -7,6 +5,7 @@ import { authenticate } from "./utils/authenticate.js";
 import { jsonify } from "./utils/jsonify.js";
 import { filter } from "./utils/filter.js";
 import { copy } from "./utils/copy.js";
+import { addMember } from "./utils/addMembers.js"
 
 const range = `Sheet1!A:G`;
 
@@ -28,7 +27,10 @@ const range = `Sheet1!A:G`;
 
     // Filter and copy the interested students to clipboard
     const interestedStudents = await filter({ students });
-    await copy({ interestedStudents });
+    const interestedStudentsEmails = await copy({ interestedStudents });
+
+    await addMember(interestedStudentsEmails);  // adding members using puppeteer
+    
   } catch (err) {
     console.log(err);
   }

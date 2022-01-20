@@ -1,7 +1,7 @@
 import clipboard from "clipboardy";
 
 /**
- * Joins the Email IDs of students with ", " and copies the string to clipboard.
+ * Joins the Email IDs of students with ", " and copies the string to clipboard and returns the string.
  *
  * Google APIs don't allow accounts outside of workspace to access the
  * admin API, so a string of the emails is copied, and can be pasted into
@@ -14,6 +14,7 @@ async function copy({ interestedStudents }) {
     .map((student) => student.email)
     .join(", ");
   clipboard.writeSync(copyEMailIDs);
+  return copyEMailIDs
 }
 
 export { copy };
