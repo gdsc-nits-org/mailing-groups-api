@@ -1,4 +1,5 @@
 import clipboard from "clipboardy";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -6,7 +7,6 @@ import { authenticate } from "./utils/authenticate.js";
 import { jsonify } from "./utils/jsonify.js";
 
 const range = `Sheet1!A:G`;
-
 async function main() {
   try {
     console.log("API started");
@@ -24,9 +24,15 @@ async function main() {
 
     const students = jsonify({ res });
 
-    console.log(students); // Data of Students in JSON Format
-
-    console.log(clipboard);
+    /**
+     * Join the Email IDs of students with ", " and generate copy string.
+     *
+     * ! Google APIs don't allow accounts outside of workspace to access the
+     * ! admin API, so a string of the emails is copied, and can be pasted into
+     * ! the dialogue box on the site.
+     */
+    const copyEMailIDs = students.map((student) => student.email).join(", ");
+    clipboard.writeSync(copyEMailIDs);
   } catch (err) {
     console.log(err);
   }
