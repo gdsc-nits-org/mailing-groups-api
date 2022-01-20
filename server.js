@@ -1,16 +1,17 @@
 import clipboard from "clipboardy";
+import inquirer from "inquirer";
 
 import dotenv from "dotenv";
 dotenv.config();
 
 import { authenticate } from "./utils/authenticate.js";
 import { jsonify } from "./utils/jsonify.js";
+import { DOMAINS } from "./utils/enums.js";
 
 const range = `Sheet1!A:G`;
 async function main() {
   try {
     console.log("API started");
-
     const sheets = await authenticate();
 
     // Get Data from Google Sheets
@@ -32,7 +33,29 @@ async function main() {
      * ! the dialogue box on the site.
      */
     const copyEMailIDs = students.map((student) => student.email).join(", ");
-    clipboard.writeSync(copyEMailIDs);
+    // clipboard.writeSync(copyEMailIDs);
+
+    inquirer
+      .prompt({
+        type: "checkbox",
+        name: "domains",
+        message: "Select the domains > ",
+        choices: DOMAINS,
+      })
+      .then((answers) =>
+        console.log(
+          students.filter((student) => {
+            let interest = true;
+
+            for (let i = 0; i < answers.domains.length; i++) {
+              if (answers.domains.indexOf(student.domains[i]) == -1)
+                interest = false;
+            }
+
+            return interest;
+          })
+        )
+      );
   } catch (err) {
     console.log(err);
   }

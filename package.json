@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "clipboardy": "^3.0.0",
-    "googleapis": "^92.0.0"
+    "googleapis": "^92.0.0",
+    "inquirer": "^8.2.0"
   }
 }
