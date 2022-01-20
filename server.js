@@ -1,14 +1,18 @@
-require("dotenv").config();
+import clipboard from "clipboardy";
 
-const { authenticate } = require("./utils/authenticate");
-const { jsonify } = require("./utils/jsonify");
+import dotenv from "dotenv";
+dotenv.config();
+
+import { authenticate } from "./utils/authenticate.js";
+import { jsonify } from "./utils/jsonify.js";
+import { filter } from "./utils/filter.js";
+import { copy } from "./utils/copy.js";
 
 const range = `Sheet1!A:G`;
 
-async function main() {
+(async () => {
   try {
     console.log("API started");
-
     const sheets = await authenticate();
 
     // Get Data from Google Sheets
@@ -22,10 +26,10 @@ async function main() {
 
     const students = jsonify({ res });
 
-    console.log(students); // Data of Students in JSON Format
+    // Filter and copy the interested students to clipboard
+    const interestedStudents = await filter({ students });
+    await copy({ interestedStudents });
   } catch (err) {
     console.log(err);
   }
-}
-
-main();
+})();

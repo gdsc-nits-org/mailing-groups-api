@@ -9,11 +9,14 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "type": "module",
   "devDependencies": {
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "googleapis": "^92.0.0"
+    "clipboardy": "^3.0.0",
+    "googleapis": "^92.0.0",
+    "inquirer": "^8.2.0"
   }
 }
