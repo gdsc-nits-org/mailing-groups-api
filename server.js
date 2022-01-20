@@ -1,7 +1,9 @@
-require("dotenv").config();
+import clipboard from "clipboardy";
+import dotenv from "dotenv";
+dotenv.config();
 
-const { authenticate } = require("./utils/authenticate");
-const { jsonify } = require("./utils/jsonify");
+import { authenticate } from "./utils/authenticate.js";
+import { jsonify } from "./utils/jsonify.js";
 
 const range = `Sheet1!A:G`;
 
@@ -23,6 +25,8 @@ async function main() {
     const students = jsonify({ res });
 
     console.log(students); // Data of Students in JSON Format
+
+    console.log(clipboard);
   } catch (err) {
     console.log(err);
   }

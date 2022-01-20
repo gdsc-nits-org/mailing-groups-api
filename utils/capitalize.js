@@ -16,4 +16,4 @@ function capitalize(name) {
   );
 }
 
-module.exports = { capitalize };
+export { capitalize };

@@ -1,4 +1,4 @@
-const { capitalize } = require("./capitalize");
+import { capitalize } from "./capitalize.js";
 
 /**
  *  Modify Sheets Data into JSON format
@@ -27,4 +27,4 @@ function jsonify({ res }) {
   return students;
 }
 
-module.exports = { jsonify };
+export { jsonify };

@@ -17,4 +17,4 @@ const DOMAINS = [
   "Cloud/DevOps",
 ];
 
-module.exports = { BRANCHES, WISH, DOMAINS };
+export { BRANCHES, WISH, DOMAINS };

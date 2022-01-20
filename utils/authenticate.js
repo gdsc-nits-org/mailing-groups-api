@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+import { google } from "googleapis";
 
 let sheets;
 
@@ -18,4 +18,4 @@ async function authenticate() {
   });
 }
 
-module.exports = { authenticate, sheets };
+export { authenticate, sheets };
