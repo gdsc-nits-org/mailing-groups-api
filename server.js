@@ -6,10 +6,11 @@ dotenv.config();
 
 import { authenticate } from "./utils/authenticate.js";
 import { jsonify } from "./utils/jsonify.js";
-import { DOMAINS } from "./utils/enums.js";
+import { DOMAINS, WISH } from "./utils/enums.js";
 
 const range = `Sheet1!A:G`;
-async function main() {
+
+(async () => {
   try {
     console.log("API started");
     const sheets = await authenticate();
@@ -32,33 +33,46 @@ async function main() {
      * ! admin API, so a string of the emails is copied, and can be pasted into
      * ! the dialogue box on the site.
      */
-    const copyEMailIDs = students.map((student) => student.email).join(", ");
+    // const copyEMailIDs = students.map((student) => student.email).join(", ");
     // clipboard.writeSync(copyEMailIDs);
 
-    inquirer
-      .prompt({
+    let answers = await inquirer.prompt([
+      {
         type: "checkbox",
         name: "domains",
         message: "Select the domains > ",
         choices: DOMAINS,
-      })
-      .then((answers) =>
-        console.log(
-          students.filter((student) => {
-            let interest = true;
+      },
+      {
+        type: "checkbox",
+        name: "wish",
+        message: "Select the future session wishes > ",
+        choices: WISH,
+      },
+    ]);
 
-            for (let i = 0; i < answers.domains.length; i++) {
-              if (answers.domains.indexOf(student.domains[i]) == -1)
-                interest = false;
-            }
+    const interestedStudents = students.filter((student) => {
+      let interest = true;
 
-            return interest;
-          })
-        )
-      );
+      for (let i = 0; i < answers.domains.length; i++) {
+        if (student.domains.indexOf(answers.domains[i]) == -1) {
+          interest = false;
+          break;
+        }
+      }
+
+      for (let i = 0; i < answers.wish.length; i++) {
+        if (student.wish.indexOf(answers.wish[i]) == -1) {
+          interest = false;
+          break;
+        }
+      }
+
+      return interest;
+    });
+
+    console.log(interestedStudents);
   } catch (err) {
     console.log(err);
   }
-}
-
-main();
+})();
