@@ -8,7 +8,8 @@ import { jsonify } from "./utils/jsonify.js";
 import { filter } from "./utils/filter.js";
 import { copy } from "./utils/copy.js";
 
-const range = `Sheet1!A:G`;
+const range = `Sheet1!B:D`;
+// const range = `Sheet1!A:G`;
 
 (async () => {
   try {
@@ -24,10 +25,12 @@ const range = `Sheet1!A:G`;
     ).data.values;
     res.shift(); // Removes the first row (headings) of sheets
 
-    const students = jsonify({ res });
+    // const students = jsonify({ res });
+    const interestedStudents = jsonify({ res });
 
     // Filter and copy the interested students to clipboard
-    const interestedStudents = await filter({ students });
+    // const interestedStudents = await filter({ students });
+
     await copy({ interestedStudents });
   } catch (err) {
     console.log(err);
